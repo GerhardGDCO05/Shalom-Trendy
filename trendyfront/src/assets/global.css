@@ -1,0 +1,15 @@
+html,
+body,
+#app {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(#c278ec, #a00ebd);
+     font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+}
