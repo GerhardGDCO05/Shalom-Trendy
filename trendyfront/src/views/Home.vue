@@ -2,7 +2,7 @@
     <section class="layout-Info">
         <header class="infoBar">
             <section class="Title">
-                <img class="logo" src="../../public/iconos/logoShalom.jpg" alt="logo ShalomTrendy">
+                <img class="logo" :src="publicPath + 'iconos/logoShalom.jpg'" alt="logo ShalomTrendy">
                 <div>
                     <h1>ShalomTrendy</h1>
                     <p :style="{fontFamily:'sans-serif', fontWeight:'bold'}">Moda Femenina Moderna</p>
@@ -24,9 +24,9 @@
                 
             </section>
             <section class="social-Web">
-                <img onclick="window.open('https://www.instagram.com/shalomtrendy.ve/', '_blank')" src="/iconos/instagram.png" alt="instagram">
-                <img onclick="window.open('https://www.tiktok.com/@shalomtrendy.ve', '_blank')" src="/iconos/tiktok.png" alt="tiktok">
-                <img onclick="window.open('https://wa.me/584242066580?text=Hola%2C%20quiero%20consultar%20precios%20y%20disponibilidad', '_blank')" src="/iconos/whatsapp.png" alt="whatsapp">
+                <img onclick="window.open('https://www.instagram.com/shalomtrendy.ve/', '_blank')" :src="publicPath + 'iconos/instagram.png'" alt="instagram">
+                <img onclick="window.open('https://www.tiktok.com/@shalomtrendy.ve', '_blank')" :src="publicPath + 'iconos/tiktok.png'" alt="tiktok">
+                <img onclick="window.open('https://wa.me/584242066580?text=Hola%2C%20quiero%20consultar%20precios%20y%20disponibilidad', '_blank')" :src="publicPath + 'iconos/whatsapp.png'" alt="whatsapp">
             </section>
         </article>
     </section>
@@ -132,6 +132,8 @@ export default defineComponent({
         // Array para guardar el índice actual de cada categoría
         const currentIndices = ref(topsList.map(() => 0));
 
+        const publicPath = process.env.BASE_URL;
+
         // Función para obtener el array de imágenes de un objeto categoría
         const getCategoryArray = (categoryObj: Category): string[] => {
             const key = Object.keys(categoryObj)[0];
@@ -141,7 +143,8 @@ export default defineComponent({
         // Función para obtener la imagen actual de una categoría
         const getCurrentImage = (categoryObj: Category, index: number): string => {
             const arr = getCategoryArray(categoryObj);
-            return arr[index];
+            const path = arr[index];
+            return process.env.BASE_URL + (path.startsWith('/') ? path.slice(1) : path);
         };
 
         // Función para obtener la longitud de una categoría
@@ -196,6 +199,7 @@ export default defineComponent({
             getCategoryName,
             nextImage,
             prevImage,
+            publicPath,
         }
     }
 });
